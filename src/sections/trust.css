@@ -1,0 +1,104 @@
+/* ── Trust Badges Banner — Textured Certificate-Style Panel with brass rules ── */
+
+.tb {
+  background: var(--band-deep);
+  color: var(--on-dark);
+  overflow: hidden;
+}
+
+/* Engraved ground: two fine diagonal hatches at very low contrast. */
+.tb-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    repeating-linear-gradient(58deg, var(--light-a07) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-58deg, var(--brass-a09) 0 1px, transparent 1px 13px);
+}
+
+.tb-shell { position: relative; }
+
+.tb-rules { display: grid; gap: 3px; }
+.tb-rule {
+  display: block;
+  height: var(--hair-2);
+  background: var(--brass);
+}
+.tb-rule--fine { height: var(--hair); background: var(--brass-dark); }
+
+/* Certificate corner marks. */
+.tb-corner {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 0 solid var(--brass);
+  opacity: 0.75;
+}
+.tb-corner--tl { top: 12px; left: -14px; border-block-start-width: var(--hair); border-inline-start-width: var(--hair); }
+.tb-corner--tr { top: 12px; right: -14px; border-block-start-width: var(--hair); border-inline-end-width: var(--hair); }
+.tb-corner--bl { bottom: 12px; left: -14px; border-block-end-width: var(--hair); border-inline-start-width: var(--hair); }
+.tb-corner--br { bottom: 12px; right: -14px; border-block-end-width: var(--hair); border-inline-end-width: var(--hair); }
+
+.tb-title {
+  display: block;
+  margin-block: clamp(20px, 2.2vw, 30px) clamp(18px, 2vw, 26px);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--t-fine);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.tb-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-block-end: clamp(22px, 2.4vw, 32px);
+}
+.tb-cell + .tb-cell { border-inline-start: var(--hair) solid var(--brass-dark); }
+
+.tb-badge {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-2);
+  text-align: center;
+  padding: var(--s-2) var(--s-4);
+}
+/* One icon size, one stroke weight, one optical baseline across all four. */
+.tb-icon {
+  --icon: 26px;
+  color: var(--brass);
+  stroke-width: var(--icon-stroke);
+  margin-block-end: var(--s-1);
+}
+.tb-badge-title {
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  line-height: 1.25;
+  color: var(--on-dark);
+  text-wrap: balance;
+}
+.tb-badge-note {
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+  color: var(--on-dark-mute);
+  line-height: 1.4;
+}
+
+@media (max-width: 860px) {
+  .tb-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tb-cell:nth-child(3) { border-inline-start: 0; }
+  .tb-cell:nth-child(n + 3) {
+    border-block-start: var(--hair) solid var(--brass-dark);
+    padding-block-start: var(--s-5);
+    margin-block-start: var(--s-4);
+  }
+  .tb-corner { display: none; }
+}
+
+@media (max-width: 420px) {
+  .tb-badge { padding-inline: var(--s-2); }
+  .tb-badge-title { font-size: var(--t-body-s); }
+}

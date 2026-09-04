@@ -1,0 +1,205 @@
+/* ── Header — Centered Logo Split Nav / Minimal Underline Link Treatment ──── */
+
+.hd {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: var(--paper);
+  transition: box-shadow var(--dur-mid) var(--ease-out-cubic);
+}
+.hd[data-compact='true'] { box-shadow: var(--elev-float); }
+
+/* ── Subheader contact band ──────────────────────────────────────────────── */
+.hd-sub {
+  background: var(--band-deep);
+  overflow: hidden;
+  max-height: 34px;
+  transition: max-height var(--dur-mid) var(--ease-out-quart),
+              opacity var(--dur-fast) linear;
+}
+.hd[data-compact='true'] .hd-sub { max-height: 0; opacity: 0; }
+
+.hd-sub-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  height: 34px;
+  font-size: var(--t-micro);
+  font-weight: 600;
+  letter-spacing: var(--track-caps-sm);
+  text-transform: uppercase;
+  color: var(--on-dark-mute);
+  white-space: nowrap;
+}
+.hd-sub-link { color: var(--on-dark-soft); transition: color var(--hover-dur) linear; }
+.hd-sub-link:hover { color: var(--brass); }
+.hd-sub-dot { color: var(--brass-dark); }
+
+/* ── Main bar ────────────────────────────────────────────────────────────── */
+.hd-bar { border-block-end: var(--hair) solid var(--rule); }
+.hd-bar-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--s-6);
+  height: 62px;
+  transition: height var(--dur-mid) var(--ease-out-quart);
+}
+.hd[data-compact='true'] .hd-bar-inner { height: 58px; }
+
+/* ── Wordmark, dead centre ───────────────────────────────────────────────── */
+.hd-mark {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  line-height: 1;
+  padding-inline: var(--s-4);
+}
+.hd-mark-name {
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.hd-mark-sub {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-micro);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  padding-inline-start: 0.3em;
+}
+.hd-mark-rule { display: block; width: 18px; height: var(--hair); background: var(--brass-line); }
+.hd-mark-mono { display: none; }
+
+/* ── Link groups ─────────────────────────────────────────────────────────── */
+.hd-nav--left { justify-self: start; }
+.hd-nav--right { justify-self: end; }
+.hd-list { display: flex; align-items: center; gap: var(--s-5); }
+.hd-item { position: relative; display: flex; align-items: center; gap: 2px; }
+
+.hd-link {
+  position: relative;
+  font-size: var(--t-fine);
+  font-weight: 600;
+  letter-spacing: var(--track-caps-sm);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-block: var(--s-5);
+  white-space: nowrap;
+  transition: color var(--hover-dur) linear;
+}
+.hd-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  height: var(--hair);
+  background: var(--brass);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 240ms var(--ease-out-quart);
+}
+.hd-item:hover .hd-link,
+.hd-link:focus-visible { color: var(--ink); }
+.hd-item:hover .hd-link::after { transform: scaleX(1); }
+
+.hd-caret {
+  display: grid;
+  place-items: center;
+  color: var(--ink-mute);
+  padding: var(--s-1);
+  transition: transform var(--dur-fast) var(--ease-out-cubic), color var(--dur-fast) linear;
+}
+.hd-caret .lucide { --icon: 13px; }
+.hd-caret[aria-expanded='true'] { transform: rotate(180deg); color: var(--brass-ink); }
+
+/* ── Dropdown panel ──────────────────────────────────────────────────────── */
+.hd-panel {
+  position: absolute;
+  top: calc(100% - 6px);
+  left: -18px;
+  z-index: 5;
+  width: 524px;
+  padding: var(--s-5) var(--s-6) var(--s-6);
+  background: var(--paper);
+  border: var(--hair) solid var(--rule);
+  border-block-start: var(--hair-2) solid var(--brass);
+  opacity: 0;
+  visibility: hidden;
+  clip-path: inset(0 0 100% 0);
+  transition:
+    clip-path 300ms var(--ease-out-quart),
+    opacity 180ms linear,
+    visibility 0s linear 300ms;
+}
+.hd-panel[data-open='true'] {
+  opacity: 1;
+  visibility: visible;
+  clip-path: inset(0 0 0 0);
+  transition:
+    clip-path 340ms var(--ease-out-quart),
+    opacity 200ms linear,
+    visibility 0s;
+}
+.hd-panel-label { display: block; color: var(--brass-ink); }
+.hd-panel-rule { margin-block: var(--s-2) var(--s-4); }
+.hd-panel-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px var(--s-6);
+}
+.hd-panel-link {
+  display: block;
+  padding-block: 7px;
+  font-size: var(--t-body-s);
+  color: var(--ink-soft);
+  border-block-end: var(--hair) solid transparent;
+  transition: color var(--hover-dur) linear, border-color var(--hover-dur) linear;
+}
+.hd-panel-link:hover {
+  color: var(--brass-ink);
+  border-block-end-color: var(--brass-line);
+}
+
+/* ── Right cluster ───────────────────────────────────────────────────────── */
+.hd-right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+}
+.hd-call { padding: 12px var(--s-5); font-size: var(--t-micro); }
+.hd-call-short { display: none; }
+
+/* ── Mobile: no hamburger. Wordmark + call, condensing on scroll ─────────── */
+@media (max-width: 900px) {
+  .hd-sub { display: none; }
+  .hd-bar-inner {
+    grid-template-columns: auto 1fr;
+    height: 58px;
+    gap: var(--s-3);
+  }
+  .hd-nav { display: none; }
+  .hd-mark { justify-items: start; padding-inline: 0; }
+  .hd-right { gap: 0; }
+  .hd-call-label { display: none; }
+  .hd-call-short { display: inline; }
+  .hd-call { padding: 11px var(--s-4); }
+
+  .hd[data-compact='true'] .hd-mark-name,
+  .hd[data-compact='true'] .hd-mark-sub { display: none; }
+  .hd[data-compact='true'] .hd-mark-mono {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--t-h3);
+    letter-spacing: 0.1em;
+    color: var(--brass-ink);
+  }
+}

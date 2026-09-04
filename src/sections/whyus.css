@@ -1,0 +1,67 @@
+/* ── Why Us — Single Statement + Supporting Points / Underline Accent Rule ──
+   Grid-Breaking Oversized Image, use 1 of 2: the photograph runs to the left
+   viewport edge and taller than the statement beside it. */
+
+.why { background: var(--paper); overflow: hidden; }
+
+.why-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+  gap: clamp(30px, 4.6vw, 76px);
+  align-items: center;
+}
+
+.why-figure {
+  margin-inline-start: calc(var(--shell-margin) * -1);
+  margin-block: calc(var(--s-6) * -1) calc(var(--s-6) * -1);
+}
+.why-figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 46%;
+}
+
+.why-eyebrow { display: block; margin-block-end: var(--s-3); }
+.why-title { font-size: var(--t-h2-lg); max-width: 17ch; }
+.why-lede { margin-block-start: var(--s-5); max-width: 40ch; }
+
+.why-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 44px);
+  margin-block-start: clamp(46px, 5.6vw, 90px);
+}
+.why-point-rule { width: 100%; margin-block-end: var(--s-4); }
+.why-point-icon { --icon: 22px; color: var(--brass-ink); margin-block-end: var(--s-3); }
+.why-point-title {
+  font-size: var(--t-h4);
+  line-height: 1.28;
+  margin-block-end: var(--s-2);
+  text-wrap: balance;
+}
+.why-point-body {
+  font-size: var(--t-body-s);
+  line-height: 1.62;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 1024px) {
+  .why-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-7) var(--s-6); }
+}
+
+@media (max-width: 820px) {
+  .why-top { grid-template-columns: minmax(0, 1fr); gap: var(--s-7); }
+  .why-figure {
+    margin-inline-end: calc(var(--shell-margin) * -1);
+    margin-block: 0;
+    order: 2;
+  }
+  .why-figure img { aspect-ratio: 16 / 9; }
+  .why-statement { order: 1; }
+  .why-title { max-width: none; }
+}
+
+@media (max-width: 560px) {
+  .why-row { grid-template-columns: minmax(0, 1fr); gap: var(--s-6); }
+}

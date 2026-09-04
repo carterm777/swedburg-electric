@@ -1,0 +1,130 @@
+/* ── Site-specific motion ───────────────────────────────────────────────────
+   Six techniques written for Swedburg Electric that are not in the shared kit.
+   Each is a real entry from references/animation-and-motion-richness.md read
+   through this brand's temperament — unhurried, quart/cubic ease-out, nothing
+   bouncy — and each has its own reduced-motion fallback at the bottom.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* 1 ── Ken Burns Slow Zoom (hero photograph) ─────────────────────────────── */
+@keyframes swe-kb {
+  from { transform: scale(1)    translate3d(0, 0, 0); }
+  to   { transform: scale(1.07) translate3d(-1.5%, -1%, 0); }
+}
+[data-kb] {
+  animation: swe-kb var(--kb-dur) var(--ease-in-out) infinite alternate;
+  will-change: transform;
+}
+
+/* 2 ── Centre-out rule draw (trust banner certificate rules) ─────────────── */
+[data-rule='center'] {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--dur-slow) var(--ease-out-quart) var(--reveal-delay);
+}
+[data-in='true'] [data-rule='center'],
+[data-in='true'][data-rule='center'] { transform: scaleX(1); }
+
+/* 3 ── Photo-plate bloom (widget preview on file attach) ─────────────────── */
+@keyframes swe-bloom {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: scale(1.06);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+[data-bloom] {
+  animation: swe-bloom 820ms var(--ease-out-quart) both;
+  will-change: clip-path, transform, filter;
+}
+
+/* 4 ── Index row sweep (coverage towns) ──────────────────────────────────── */
+.sweep-row { position: relative; }
+.sweep-row > .sweep-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--hair);
+  background: var(--brass);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 380ms var(--ease-out-quart);
+}
+.sweep-row > .sweep-name {
+  display: inline-block;
+  transition: transform 380ms var(--ease-out-quart), color 300ms linear;
+}
+.sweep-row:hover > .sweep-line,
+.sweep-row:focus-visible > .sweep-line { transform: scaleX(1); }
+.sweep-row:hover > .sweep-name,
+.sweep-row:focus-visible > .sweep-name {
+  transform: translateX(6px);
+  color: var(--brass-ink);
+}
+
+/* 5 ── Letterpress press-in lives on .btn--brass in app.css ──────────────── */
+
+/* 6 ── Star fill sweep ───────────────────────────────────────────────────── */
+.stars[data-sweep] .lucide {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 420ms var(--ease-out-quart) var(--star-delay, 0ms);
+}
+.stars[data-sweep][data-in='true'] .lucide { clip-path: inset(0 0 0 0); }
+
+/* ── Banner Background Slow Pan (final CTA) ───────────────────────────────── */
+@keyframes swe-pan {
+  from { transform: scale(1.08) translate3d(-1.6%, 0, 0); }
+  to   { transform: scale(1.08) translate3d(1.6%, 0, 0); }
+}
+[data-pan] {
+  animation: swe-pan var(--pan-dur) linear infinite alternate;
+  will-change: transform;
+}
+
+/* ── Image Zoom on Hover (service photographs) ───────────────────────────── */
+.zoomable { overflow: hidden; }
+.zoomable img {
+  transition: transform 700ms var(--ease-out-quart);
+}
+.zoomable:hover img { transform: scale(1.04); }
+
+/* ── Progressive Reveal Scrub (story paragraphs), --scrub written by JS ──────
+   Applied to a marginal brass rule that grows with scroll rather than to the
+   body copy's own opacity — the reading never pays for the effect. */
+[data-scrub] { position: relative; }
+[data-scrub]::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.4em 0.25em;
+  inset-inline-start: -26px;
+  width: var(--hair);
+  background: var(--brass);
+  /* Never fully absent — it reads as a marginal rule that completes as you
+     read past it, not as content waiting to appear. */
+  transform: scaleY(calc(0.25 + (var(--scrub, 1) * 0.75)));
+  transform-origin: top center;
+}
+@media (max-width: 900px) {
+  [data-scrub]::before { display: none; }
+}
+
+/* ── Reduced motion — every technique above collapses to its end state ────── */
+@media (prefers-reduced-motion: reduce) {
+  [data-kb],
+  [data-pan],
+  [data-bloom] { animation: none !important; }
+  [data-bloom] { opacity: 1 !important; clip-path: none !important; }
+  [data-rule='center'] { transform: none !important; }
+  .sweep-row > .sweep-line { transform: scaleX(1) !important; opacity: 0.5; }
+  .sweep-row:hover > .sweep-name { transform: none !important; }
+  .stars[data-sweep] .lucide { clip-path: none !important; }
+  .zoomable:hover img { transform: none !important; }
+  [data-scrub]::before { transform: none !important; }
+}

@@ -1,0 +1,188 @@
+You are building a one-page cold-outreach demo site in React. This needs to look like a genuinely premium, $10,000+ custom local-business build — luxurious, high-fidelity, restrained, not a template, not AI-generated. This is a redesign concept for a business that already has a live site at http://swedburgelectric.com/ — services, facts, and positioning were extracted from that page, but ALL copy below is freshly written, not reworded from the source.
+
+WORKFLOW — FOLLOW EXACTLY
+1. This project's working directory already contains a copy of the section-style-repo-animation+ folder. List it first to confirm what's actually there, then read front-end-design.md from its root exactly: build a token system first (but use the fonts/colors given below as fixed — don't re-derive a palette), avoid its named generic-AI-design defaults, watch CSS selector specificity so section-level and element-level classes don't cancel each other out, and take screenshots to self-critique against this brief before opening the preview.
+2. For EVERY section on this page, consult section-style-repo.md and its references/ subfolder (also inside that same folder) and run its full three-phase process (layout, visual style, animation) from its own reference files — don't skip straight to code. Use its selection log to keep real variety across sections on this page. When multiple options fit equally well, prefer whichever reads more premium, restrained, and editorial-caliber for this trade and city. Run both finishing passes (elevation sweep, coherence sweep) after every section is built once. If a referenced file isn't at the exact path expected, list the folder's contents and use whichever files you actually find — don't silently skip the design system.
+3. Build the full site locally.
+4. Before opening the preview, take screenshots of the desktop and primary mobile breakpoints and self-critique the whole page against this brief per front-end-design.md's critique guidance — fix anything that reads generic, templated, or unfinished before I see it.
+5. Open a live preview window automatically once built. Wait for review.
+6. I will request changes/fixes — make them in this same session.
+7. Do NOT deploy until I explicitly say "push and deploy."
+8. On "push and deploy": call deploy_to_vercel with target: production,
+   name: swedburgelectric (fallback to swedburgelectric-cochrane only if the exact
+   name is unavailable). Before deploying, initialize git in this project directory if it isn't already a git repo, stage and commit all files, add the remote https://github.com/carterm777/swedburg-electric (this repo already exists on GitHub, created empty), and push to its main branch.
+9. Add <meta name="robots" content="noindex, nofollow"> to every page.
+
+HEADING STRUCTURE (mandatory): one H1, one H2 per section, H3 for sub-items, never
+skip a level, never fake a heading with a styled div. Title Case all headers.
+
+HERO LAYOUT (mandatory — this overrides the design system's usual full delegation for
+this one section): keep the hero content container wide enough that the H1 wraps
+across 2-3 lines, never near-single-word lines from excess side padding. Align
+the eyebrow/kicker line above the H1 with the top edge of the photo-diagnosis widget on
+the same vertical line. Directly beneath the H1/subheadline, place the 4 value-badges/
+objection-overcomers strip (short label + real Lucide icon each). Above the fold, on
+both desktop and the primary mobile breakpoint, with zero scrolling required: H1 +
+subheadline, the 4 value-badges, the primary click-to-call button, the secondary CTA
+button (to Services), and the photo-diagnosis widget must all be visible. (The
+Google-reviews strip is not part of the hero — see the Google Reviews Section below.)
+
+GOOGLE REVIEWS SECTION (mandatory, fixed position — also overrides full delegation): a
+standalone section renders directly below the hero, before the Trust Badges Banner,
+never inside the hero and never moved further down the page. It carries the
+fabricated, hyper-realistic placeholder Google-reviews strip (4-5 reviews, 5-star,
+first-name-plus-last-initial attribution, styled to read unmistakably as a
+Google-reviews block with a prominent aggregate-rating callout). Give this section
+real design ambition — a proper grid or carousel layout, generous spacing — since it
+no longer has to compete for space inside the hero.
+
+TRUST BADGES BANNER (mandatory, fixed position — also overrides full delegation): a
+full-width banner renders directly below the Google Reviews Section, never inside the
+hero and never moved further down the page. It carries real third-party trust marks —
+licenses, certifications, BBB accreditation/rating, trade-association membership,
+awards — pulled from the business's real facts, if provided or available; never a
+fabricated specific credential. Pad out to exactly four badges with generic,
+unquantified trust language ("Licensed & Insured," "Locally Owned & Operated," "Years
+of Experience," "Satisfaction Guaranteed") where fewer than four real credentials
+exist. Each badge uses one real, meaning-matched Lucide icon (shield for licensing/
+certification, badge/check for BBB/association accreditation, an award/star icon for
+a named award, or the nearest real equivalent) — never a generic dot/bullet standing
+in for an icon, never two badges sharing an icon. Match icon size, stroke weight, and
+alignment across all four so the row reads as one professionally designed system, not
+four mismatched glyphs.
+
+IMAGES: check this project folder for a folder named "images." If it exists, use only
+those images. If it doesn't exist, ask me whether to generate images via the
+Higgsfield MCP before building any image content — don't assume either way.
+
+BUSINESS INFO
+Business Name: Swedburg Electric
+Location: Cochrane, Alberta (serving Cochrane, Calgary, and surrounding areas)
+Industry: Residential, commercial, and renovation electrical services
+Source: existing site — http://swedburgelectric.com/
+Extracted/decided facts summary: Real site confirms: 'Proudly serving Cochrane, Calgary and surrounding areas since 2017' (real founding/service-start year); three named focus areas — Commercial / Residential / Renovations; real street address 225 Railway St E, Cochrane, AB T4C 2C3; hours Mon-Fri 8am-5pm, Sat/Sun/Holidays upon request; phone 403-804-3895 (real); email operations@swedburgelectric.com (real). No specific licence number, BBB rating, award, or review/testimonial found on the source page — represented with clearly labeled generic/placeholder language below.
+Meta description (150-160 chars, local, not a copy of the hero): Professional electricians serving Cochrane, Calgary and area since 2017. Residential, commercial and renovation electrical work, based in Cochrane, AB.
+
+BRAND IDENTITY
+Fonts: Display — Baskerville Display PT / Body — Freight Text Pro  (source: extracted (single-page live computed-style sweep only — cross-page recheck and screenshot sanity check were not performed; see notes) — note: the sweep found only three distinct hues (a dark teal, black, and white); no fourth accent colour appeared, so the Accent value below is a complementary brass tone NOT read from the live sweep, added only because the extracted set had no distinct hue for CTA contrast — flag this one value for visual confirmation before final use, unlike the other four which trace directly to the sweep.)
+Colors: Primary #173636 / Secondary #0B1F1F / Accent #B08D57 / Dark #000000 / Light #FFFFFF
+  (source: extracted (single-page live computed-style sweep only — cross-page recheck and screenshot sanity check were not performed; see notes) — note: the sweep found only three distinct hues (a dark teal, black, and white); no fourth accent colour appeared, so the Accent value below is a complementary brass tone NOT read from the live sweep, added only because the extracted set had no distinct hue for CTA contrast — flag this one value for visual confirmation before final use, unlike the other four which trace directly to the sweep.)
+Voice: Composed and editorial — a more refined, restrained register than a rough blue-collar shop, fitting a business that treats renovation and commercial coordination as a real specialty.
+
+CONTACT INFO (real where found, placeholder clearly marked otherwise)
+Phone: 403-804-3895
+Email: operations@swedburgelectric.com (real)
+Address: 225 Railway St E, Cochrane, AB T4C 2C3 (real, confirmed on source site)
+
+HEADER STRUCTURE
+Subheader: 403-804-3895 · operations@swedburgelectric.com · 225 Railway St E, Cochrane, AB T4C 2C3
+Nav (centered): Home · About · Services (dropdown: Residential Electrical, Commercial Electrical, Renovation Electrical, Panel Upgrades, Lighting Installation, Tenant Improvements, New Construction Wiring, Troubleshooting & Repairs, Electrical Inspections, EV Charger Installation, Basement Development Wiring, Service Calls) ·
+Service Areas (dropdown: Cochrane, Calgary, Airdrie, Bragg Creek, Canmore, Bearspaw, Springbank, Cochrane Lake, Crossfield, Water Valley, Ghost Lake, Bottrel) · FAQ · Blog · Contact
+Anchor map: Services → Core Services section / Service Areas → Coverage section /
+About → Story / FAQ → FAQ / Contact → Final CTA / Blog → Footer
+Right: click-to-call button + phone icon
+Mobile: no hamburger — nav reduces to click-to-call only while scrolling
+
+FOOTER STRUCTURE (4 columns): Col 1: Wordmark logo ("Swedburg Electric") + mission statement + social icons. Col 2: "Our Services" header + Residential Electrical, Commercial Electrical, Renovation Electrical, Panel Upgrades, Tenant Improvements. Col 3: "Quick Links" header + Home, About, Services, Service Areas, FAQ, Contact. Col 4: Swedburg Electric · 225 Railway St E, Cochrane, AB T4C 2C3 (real) · 403-804-3895. Plus a copyright line at the bottom.
+
+CONVERSION ELEMENTS — build all of these, none functional/backend-connected:
+- Photo-diagnosis uploader in hero (image + description + name/phone, client-side
+  success state, no backend) — this is the centerpiece and this page's signature
+  element; give it the most design ambition on the page.
+- 4 value-badges/objection-overcomers directly in the hero, beneath the headline/
+  subheadline (satisfaction guarantee/hours/emergency/licensing-insurance claim —
+  whichever four apply), each properly and professionally iconified with a real,
+  distinct, meaning-matched Lucide icon.
+- Same primary CTA repeated at natural points down the page — one ask, several spots.
+- Click-to-call everywhere (tel: links) + mobile sticky call-only bar.
+- Click-to-text (sms: link) in the final CTA and footer.
+- Fabricated, hyper-realistic placeholder Google-reviews strip in its own Google
+  Reviews Section directly below the hero, never inside the hero (4-5 reviews,
+  5-star, first-name-plus-last-initial attribution, each 1-2 sentences with a
+  distinct focus, styled to read as a recognizable Google-reviews block with a
+  prominent aggregate-rating callout) — label as placeholder needing real GBP reviews
+  before real launch.
+- Trust Badges Banner directly below the Google Reviews Section (real licensing/
+  certification/BBB-accreditation/trade-association/award credentials if provided or
+  available — never fabricated specifics — padded to exactly four badges with
+  generic, unquantified trust labels where fewer than four real credentials exist),
+  each badge properly and professionally iconified with a real, distinct,
+  meaning-matched Lucide icon.
+- Reassurance microcopy beside every form.
+- Convincing non-backend success state on every form.
+(No financing or 24-hour/emergency messaging — neither was confirmed on the source site; the stated Mon-Fri 8am-5pm hours with weekends 'upon request' point the other way, so neither appears anywhere on this page.)
+
+Apply brand fonts/colors via CSS variables throughout, no hardcoded values.
+
+PAGE COPY
+
+[HERO]
+Headline: Professional Electricians Serving Cochrane & Calgary Since 2017
+Subheadline: Licensed electricians handling residential, commercial, and renovation work across Cochrane and Calgary since 2017, with a standard of finish that shows.
+Value badges: Free Estimates (icon: calculator) · Satisfaction Guaranteed (icon: thumbs-up) · Fully Insured (icon: shield-check) · Residential, Commercial & Renovation (icon: hammer)
+
+[GOOGLE REVIEWS SECTION]
+Aggregate line: "4.9 out of 5 stars from Cochrane and Calgary-area Google reviews"
+1. Heather N. — 5 stars — "Renovated our kitchen and the electrical work was the cleanest part of the whole project. Panel labelled properly, nothing left loose behind the drywall."
+2. Craig B. — 5 stars — "Commercial tenant improvement job, done on schedule and on budget. No change orders we weren't warned about ahead of time."
+3. Priya S. — 5 stars — "Called about a renovation that had already gone sideways with another contractor. They sorted out the mess and finished it properly."
+4. Mark F. — 5 stars — "Quoted fairly and the crew was tidy on-site, which matters when you're living in the house during a renovation."
+5. Alison D. — 5 stars — "Small commercial build-out in Calgary, and they coordinated well with our other trades without needing much hand-holding."
+
+[TRUST BADGES BANNER]
+Licensed & Insured (icon: shield) [generic] · Serving Since 2017 (icon: calendar) [real] · Locally Owned & Operated (icon: map-pin) [generic] · Satisfaction Guaranteed (icon: thumbs-up) [generic]
+
+[WHY US]
+1. Renovation-Ready Expertise (icon: hammer) — Renovation electrical work means coordinating with other trades and working around a home that's still lived in. We've built our process around that reality.
+2. Commercial & Residential Range (icon: layers) — From a single-family home to a commercial tenant space, the same finish standard carries through every job.
+3. Based in Cochrane, Working Across Calgary (icon: map-pin) — Local to Cochrane and familiar with the Calgary market, so you get a contractor who knows both without a long drive changing the price.
+4. Clean, Documented Work (icon: clipboard-check) — Panels labelled, work photographed, and nothing left for the next person to guess at.
+
+[SERVICES]
+1. Residential Electrical — Wiring, repairs, and upgrades for homes across Cochrane and Calgary.
+2. Commercial Electrical — Electrical work for offices and commercial spaces, coordinated around a business's real operating hours.
+3. Renovation Electrical — Wiring planned around an existing home or space rather than treated as an afterthought.
+4. Panel Upgrades & Service Changes — Older panels replaced and capacity increased to match current electrical demand.
+5. Lighting Design & Installation — Lighting planned and wired to match how a space is really used.
+6. Tenant Improvements — Electrical build-outs for commercial tenant spaces, scheduled to keep a business's timeline on track.
+
+[SERVICE AREA / COVERAGE]
+We're based in Cochrane and regularly serve Calgary and the surrounding area, including Airdrie, Bragg Creek, Canmore, Bearspaw, Springbank, Cochrane Lake, Crossfield, Water Valley, Ghost Lake, and Bottrel. Call to confirm coverage for your specific project location.
+
+[OUR STORY]
+Renovation electrical work is a different discipline than wiring a new build. There's an existing structure to work around, other trades to coordinate with, and often a family or a business still operating in the space while the work happens. Since 2017, that's been a real part of what we do out of our Cochrane shop, alongside standard residential and commercial electrical.
+
+It changes how a job gets planned. Before opening a wall, we map out what's already there instead of guessing. On a commercial tenant space, that means working the schedule around a business that can't afford to close for a week. On a home renovation, it means leaving a work site clean enough that a family can still live around it.
+
+That approach carries across every job now, whether it started as a renovation or not — plan carefully, coordinate with everyone else on-site, and finish work that looks intentional, not patched.
+
+[FINAL CTA]
+Headline: Talk to a Cochrane Electrician About Your Next Project
+Supporting line: Residential, commercial, or renovation — get a clear quote before any work starts.
+Action: Call 403-804-3895 · click-to-call button, phone icon, plus a click-to-text (sms:) option.
+
+[FAQ]
+Q1: Do you handle renovation projects specifically, or just new wiring?
+A1: Renovation electrical work is a regular part of what we do, alongside new construction and standard residential and commercial jobs. We're used to working around an existing home or business.
+
+Q2: Do you work in Calgary, or only Cochrane?
+A2: Both. We're based in Cochrane and regularly serve Calgary and the surrounding area, including communities like Airdrie and Bragg Creek.
+
+Q3: How long have you been in business?
+A3: We've been serving Cochrane, Calgary, and area since 2017.
+
+Q4: Can you coordinate with our other renovation contractors or trades?
+A4: Yes, coordinating with other trades on a renovation or tenant improvement job is a standard part of how we plan and schedule work.
+
+Q5: Do you provide a quote before starting the job?
+A5: Yes, every project starts with a clear estimate so you know the cost before any work begins.
+
+[FOOTER COPY]
+Mission statement: We've provided licensed residential, commercial, and renovation electrical services to Cochrane, Calgary, and area since 2017. Based in Cochrane, working across the region.
+Footer services list: Residential Electrical, Commercial Electrical, Renovation Electrical, Panel Upgrades, Tenant Improvements
+Footer quick links: Home, About, Services, Service Areas, FAQ, Contact
+
+NOTES FOR CARTER (not part of the build prompt — delete before pasting if you want a
+clean paste, or leave in, Claude Code will ignore a trailing notes block it isn't
+instructed to act on):
+The street address (225 Railway St E, Cochrane, AB T4C 2C3) and email (operations@swedburgelectric.com) are both real, confirmed facts from the source site and are used directly, not as placeholders — per Carter's note this is a real, checkable address. The Accent colour (#B08D57, a muted brass) was NOT found in the live computed-style sweep — the sweep returned only a dark teal, black, and white, with no fourth hue for CTA contrast, so this one value was added as a complementary tone and should be visually confirmed (or swapped) before this palette is treated as final; the other four hex values trace directly to the sweep. Colors/fonts were otherwise read from ONE live computed-style JavaScript sweep of the homepage only — the cross-page recheck and visual screenshot sanity check called for by the skill's full Step 0A color protocol were not performed in this batch run. Step 8.6's independent fresh-eyes subagent pass was skipped: no Agent/Task tool for spawning an isolated subagent was available in this session. All other Step 8 passes were run manually against this draft.

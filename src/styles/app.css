@@ -1,0 +1,195 @@
+/* ── Page-level composition ─────────────────────────────────────────────────
+   Shared primitives only: the page ground, the type defaults, the small-cap
+   label, the rule vocabulary, the two buttons, the star row, and the section
+   rhythm modifiers. Everything else lives beside its own section, namespaced
+   under a single root class.
+
+   Section vertical rhythm is owned by .section in base.css. The modifiers here
+   only re-declare the --section-y custom property; they never re-declare
+   padding, so nothing can cancel base.css out.
+   ───────────────────────────────────────────────────────────────────────── */
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: 400;
+  line-height: var(--lh-body);
+  font-variant-numeric: lining-nums;
+}
+
+::selection {
+  background: var(--brass-soft);
+  color: var(--ink);
+}
+
+/* ── Section rhythm modifiers (custom property only) ────────────────────── */
+.section--band  { --section-y: clamp(38px, 3.4vw, 58px); }
+.section--airy  { --section-y: clamp(78px, 8vw, 148px); }
+.section--leaf  { background: var(--paper-warm); }
+.section--deep  { background: var(--band-deep); color: var(--on-dark); }
+.section--quiet { background: var(--paper-deep); }
+
+/* ── Typography defaults ─────────────────────────────────────────────────── */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--track-display);
+  line-height: var(--lh-display);
+  text-wrap: balance;
+}
+
+/* ── The small-cap label. Used for every eyebrow, field label and meta line ─ */
+.caps {
+  font-family: var(--font-body);
+  font-size: var(--t-fine);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--ink-label);
+}
+.caps--brass { color: var(--brass-ink); }
+.caps--sm    { font-size: var(--t-micro); letter-spacing: var(--track-caps-sm); }
+.caps--dark  { color: var(--on-dark-mute); }
+
+/* ── Rule vocabulary ─────────────────────────────────────────────────────── */
+.rule {
+  display: block;
+  height: var(--hair);
+  background: var(--rule);
+  border: 0;
+}
+.rule--brass { background: var(--brass-line); }
+.rule--dark  { background: var(--rule-dark); }
+
+/* ── Section heading block ───────────────────────────────────────────────── */
+.sec-head { max-width: 30ch; }
+.sec-head > .caps { display: block; margin-block-end: var(--s-3); }
+.sec-head h2 { font-size: var(--t-h2); }
+.sec-head--lg h2 { font-size: var(--t-h2-lg); }
+.sec-head--wide { max-width: 46ch; }
+
+.lede {
+  font-size: var(--t-lead);
+  line-height: var(--lh-snug);
+  color: var(--ink-soft);
+  max-width: 54ch;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  padding: 15px var(--s-6);
+  font-family: var(--font-body);
+  font-size: var(--t-body-s);
+  font-weight: 600;
+  letter-spacing: var(--track-caps-sm);
+  text-transform: uppercase;
+  line-height: 1;
+  border-radius: var(--r-1);
+  position: relative;
+  transition:
+    background-color var(--hover-dur) var(--ease-out-cubic),
+    color var(--hover-dur) var(--ease-out-cubic),
+    box-shadow var(--hover-dur) var(--ease-out-cubic),
+    transform var(--hover-dur) var(--ease-out-cubic);
+}
+.btn .lucide { --icon: 17px; }
+
+/* The one brass fill on the page: the repeated primary action.
+   Site-specific hover — letterpress press-in, not Magnetic Lift's rise. */
+.btn--brass {
+  background: var(--brass);
+  color: var(--band-deep);
+  box-shadow: inset 0 0 0 1px var(--brass), inset 0 0 0 3px transparent;
+}
+.btn--brass:hover {
+  background: var(--brass-ink);
+  color: var(--paper);
+  transform: translateY(1px);
+  box-shadow: inset 0 0 0 1px var(--brass-ink), inset 0 0 0 3px var(--brass-soft);
+}
+.btn--brass:active { transform: translateY(2px); }
+
+/* Secondary: hairline only, no fill. */
+.btn--line {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.btn--line:hover {
+  color: var(--brass-ink);
+  box-shadow: inset 0 0 0 1px var(--brass-line);
+  background: var(--brass-soft);
+}
+.btn--line-dark {
+  color: var(--on-dark);
+  box-shadow: inset 0 0 0 1px var(--brass-dark);
+}
+.btn--line-dark:hover {
+  color: var(--brass);
+  box-shadow: inset 0 0 0 1px var(--brass);
+  background: var(--brass-a09);
+}
+.btn--wide { width: 100%; }
+
+/* ── Text link with an underline that sweeps in ──────────────────────────── */
+.tlink {
+  position: relative;
+  color: inherit;
+  display: inline-block;
+  padding-block-end: 2px;
+}
+.tlink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--hair);
+  background: currentColor;
+  opacity: 0.42;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 260ms var(--ease-out-quart), opacity 260ms linear;
+}
+.tlink:hover::after { transform: scaleX(1); opacity: 1; }
+
+/* ── Star row — brass, never yellow. Fill sweep lives in site-motion.css ─── */
+.stars {
+  display: inline-flex;
+  gap: 3px;
+  color: var(--brass);
+}
+.stars .lucide { --icon: 15px; fill: currentColor; stroke-width: 0; }
+.stars--lg .lucide { --icon: 20px; }
+
+/* ── Placeholder disclosure, used by the reviews block and the footer ────── */
+.placeholder {
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+  font-style: italic;
+}
+.placeholder--dark { color: var(--on-dark-mute); }
+
+/* ── Skip link ───────────────────────────────────────────────────────────── */
+.skip-link {
+  background: var(--band-deep);
+  color: var(--on-dark);
+  font-size: var(--t-fine);
+  font-weight: 600;
+  letter-spacing: var(--track-caps-sm);
+  text-transform: uppercase;
+}
+
+/* ── Layout helpers ──────────────────────────────────────────────────────── */
+.stack > * + * { margin-block-start: var(--s-4); }
+.bleed-left  { margin-inline-start: calc(var(--gutter) * -1); }
+.bleed-right { margin-inline-end: calc(var(--gutter) * -1); }
+
+img { background: var(--paper-edge); }

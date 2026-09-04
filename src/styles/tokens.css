@@ -1,0 +1,173 @@
+/* ── Swedburg Electric — design tokens ──────────────────────────────────────
+   Every colour, type step, space step, radius, rule weight and duration on this
+   site is declared once here. Component CSS references the variables and never
+   a raw hex or px font size.
+
+   The five brand values from PROMPT.txt are fixed. Everything below them is
+   derived from those five by mixing — the percentages are recorded in the
+   comment beside each so the derivation stays auditable. Values are written as
+   flat hex rather than colour-mix() so the palette cannot silently collapse on
+   an older engine.
+   ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Brand — fixed, from PROMPT.txt ─────────────────────────────────────── */
+  --c-primary:   #173636;   /* dark teal   */
+  --c-secondary: #0B1F1F;   /* near-black teal */
+  --c-accent:    #B08D57;   /* brass       */
+  --c-dark:      #000000;
+  --c-light:     #FFFFFF;
+
+  /* ── Surfaces, derived from light + primary ─────────────────────────────── */
+  --paper:        #F6F7F7;  /* light 96 / primary 4  — carries the page      */
+  --paper-deep:   #ECEFEF;  /* light 92 / primary 8  — quiet section change  */
+  --paper-warm:   #F1F2F0;  /* light 92 / primary 5 / accent 3 — story leaf  */
+  --paper-edge:   #DEE3E3;  /* light 86 / primary 14 — image beds            */
+  --band-mid:     #173636;  /* primary               — mid-dark panel        */
+  --band-deep:    #0B1F1F;  /* secondary             — deepest band          */
+  --band-floor:   #061111;  /* secondary 55 / dark 45 — footer legal bar     */
+
+  /* ── Ink on paper ───────────────────────────────────────────────────────── */
+  --ink:          #0B1F1F;  /* secondary                          */
+  --ink-soft:     #4A5959;  /* secondary 74 / light 26  — 6.9:1   */
+  --ink-label:    #596767;  /* secondary 68 / light 32  — 5.5:1   */
+  --ink-mute:     #798484;  /* secondary 55 / light 45  — 3.6:1, large type only */
+  --ink-faint:    #B6BEBE;  /* secondary 30 / light 70  — decorative only */
+
+  /* ── Ink on the dark bands ──────────────────────────────────────────────── */
+  --on-dark:      #ECEFEF;  /* light 92 / primary 8   */
+  --on-dark-soft: #BEC7C7;  /* light 72 / primary 28  */
+  --on-dark-mute: #909E9E;  /* light 52 / primary 48  — 6.1:1 on band-deep */
+
+  /* ── Brass ──────────────────────────────────────────────────────────────── */
+  --brass:        #B08D57;  /* accent — fills, stars, rules on dark        */
+  --brass-ink:    #826E47;  /* accent 72 / secondary 28 — 4.6:1 on paper   */
+  --brass-line:   #C5AD87;  /* accent 70 / paper 30 — hairlines on paper   */
+  --brass-soft:   #E4D9C6;  /* accent 28 / paper 72 — ghosted fills        */
+  --brass-dark:   #71633F;  /* accent 62 / secondary 38 — rules on dark    */
+
+  /* ── Translucent layers (scrims, washes) — same five hues, with alpha ───── */
+  --paper-a34:  rgba(246, 247, 247, 0.34);
+  --paper-a12:  rgba(246, 247, 247, 0.12);
+  --ink-a06:    rgba(11, 31, 31, 0.06);
+  --ink-a16:    rgba(11, 31, 31, 0.16);
+  --ink-a55:    rgba(11, 31, 31, 0.55);
+  --ink-a74:    rgba(11, 31, 31, 0.74);
+  --ink-a88:    rgba(11, 31, 31, 0.88);
+  --brass-a09:  rgba(176, 141, 87, 0.09);
+  --brass-a16:  rgba(176, 141, 87, 0.16);
+  --brass-a22:  rgba(176, 141, 87, 0.22);
+  --light-a07:  rgba(255, 255, 255, 0.07);
+  /* mask stops — a mask only reads alpha, so the hue here is irrelevant */
+  --mask-0:     rgba(0, 0, 0, 0);
+  --mask-half:  rgba(0, 0, 0, 0.55);
+  --mask-1:     rgba(0, 0, 0, 1);
+
+  /* ── Rules ──────────────────────────────────────────────────────────────── */
+  --rule:         #CDD4D4;  /* primary 18 on paper */
+  --rule-strong:  #AEB9B9;  /* primary 32 on paper */
+  --rule-dark:    #324343;  /* light 16 on secondary */
+  --hair:         1px;
+  --hair-2:       2px;
+
+  /* ── Third-party mark (Google) — not part of the brand palette ──────────── */
+  --g-blue:  #4285F4;
+  --g-red:   #EA4335;
+  --g-amber: #FBBC05;
+  --g-green: #34A853;
+
+  /* ── Type roles ─────────────────────────────────────────────────────────── */
+  --font-display: 'Libre Baskerville', 'Baskerville', 'Hoefler Text',
+                  'Times New Roman', serif;
+  --font-body:    'Source Serif 4', 'Iowan Old Style', 'Palatino Linotype',
+                  Georgia, serif;
+
+  /* ── Type scale ─────────────────────────────────────────────────────────── */
+  --t-micro:   0.6875rem;                        /* 11 — caps labels        */
+  --t-fine:    0.75rem;                          /* 12 — caps labels, meta  */
+  --t-small:   0.8125rem;                        /* 13 — microcopy          */
+  --t-body-s:  0.9375rem;                        /* 15 — dense body         */
+  --t-body:    1.0625rem;                        /* 17 — body              */
+  --t-body-l:  clamp(1.0625rem, 0.62vw + 0.9rem, 1.1875rem);
+  --t-lead:    clamp(1.125rem, 0.55vw + 1rem, 1.3125rem);
+  --t-h4:      clamp(1rem, 0.4vw + 0.92rem, 1.125rem);
+  --t-h3:      clamp(1.125rem, 0.5vw + 1.02rem, 1.3125rem);
+  --t-h3-lg:   clamp(1.25rem, 0.9vw + 1.05rem, 1.625rem);
+  --t-h2:      clamp(1.6rem, 2.1vw + 1.05rem, 2.625rem);
+  --t-h2-lg:   clamp(1.85rem, 2.7vw + 1.1rem, 3.125rem);
+  --t-h1:      clamp(1.9rem, 2.25vw + 1.15rem, 3.05rem);
+  --t-quote:   clamp(1.375rem, 1.5vw + 1rem, 2rem);
+  --t-numeral: clamp(3.25rem, 4.6vw + 1.4rem, 5.75rem);
+  --t-mark:    clamp(4.5rem, 7vw + 1rem, 9rem);   /* the oversized quote mark */
+  --t-dropcap: clamp(3.1rem, 3.4vw + 1.6rem, 4.25rem);
+
+  /* Tracking + leading */
+  --track-caps:    0.18em;
+  --track-caps-sm: 0.14em;
+  --track-display: -0.014em;
+  --lh-display:    1.14;
+  --lh-tight:      1.2;
+  --lh-body:       1.66;
+  --lh-snug:       1.5;
+
+  /* ── Space scale ────────────────────────────────────────────────────────── */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  22px;
+  --s-6:  30px;
+  --s-7:  40px;
+  --s-8:  54px;
+  --s-9:  72px;
+  --s-10: 96px;
+  --s-11: 128px;
+
+  /* ── Section rhythm (consumed by base.css) ──────────────────────────────── */
+  --section-y:    clamp(64px, 6.4vw, 116px);
+  --gutter:       clamp(20px, 3.6vw, 56px);
+  --shell:        1180px;
+  --shell-narrow: 720px;
+  --shell-wide:   1360px;
+  --measure:      62ch;
+  /* Distance from the viewport edge to the shell edge — lets a grid item bleed
+     to the true page edge without depending on its own containing block. */
+  --shell-margin: max(var(--gutter), calc((100vw - var(--shell)) / 2));
+
+  /* ── Radii + elevation ──────────────────────────────────────────────────── */
+  /* This page has no drop shadows on any card. Elevation is expressed as
+     hairlines and tint steps; the one real shadow is reserved for the two
+     floating chrome elements (scrolled header, sticky call bar). */
+  --r-0: 0px;
+  --r-1: 2px;
+  --r-2: 3px;
+  --r-pill: 999px;
+  --elev-hair:   inset 0 0 0 1px var(--rule);
+  --elev-brass:  inset 0 0 0 1px var(--brass-line);
+  --elev-float:  0 1px 0 rgba(11, 31, 31, 0.06), 0 10px 30px rgba(11, 31, 31, 0.10);
+
+  /* ── Motion — this brand is unhurried ───────────────────────────────────── */
+  --reveal-rise:     22px;
+  --reveal-dur:      700ms;
+  --reveal-dur-slow: 880ms;
+  --hover-dur:       260ms;
+  --dur-fast:        200ms;
+  --dur-mid:         320ms;
+  --dur-slow:        620ms;
+  --kb-dur:          28s;
+  --pan-dur:         36s;
+
+  /* ── Chrome ─────────────────────────────────────────────────────────────── */
+  --header-h:     96px;
+  --header-h-sm:  58px;
+  --icon:         20px;
+  --icon-stroke:  1.4;
+  --focus-ring:   #826E47;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --header-h: var(--header-h-sm);
+    --section-y: clamp(56px, 10vw, 80px);
+  }
+}

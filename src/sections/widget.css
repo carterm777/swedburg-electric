@@ -1,0 +1,256 @@
+/* ── Photo-diagnosis widget — the signature element ──────────────────────────
+   Certificate plate: outer brass hairline, second inset rule, four corner
+   brackets, underline-only fields. No shadow. No dashed drop zone. */
+
+.pd {
+  position: relative;
+  background: var(--paper);
+  border: var(--hair) solid var(--brass-line);
+  /* the second, inset rule — the letterpress tell */
+  box-shadow: inset 0 0 0 6px var(--paper), inset 0 0 0 7px var(--brass-soft);
+}
+
+/* Corner brackets, drawn from two borders each. */
+.pd-corner {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border: 0 solid var(--brass);
+  z-index: 2;
+}
+.pd-corner--tl { top: 3px; left: 3px; border-block-start-width: var(--hair); border-inline-start-width: var(--hair); }
+.pd-corner--tr { top: 3px; right: 3px; border-block-start-width: var(--hair); border-inline-end-width: var(--hair); }
+.pd-corner--bl { bottom: 3px; left: 3px; border-block-end-width: var(--hair); border-inline-start-width: var(--hair); }
+.pd-corner--br { bottom: 3px; right: 3px; border-block-end-width: var(--hair); border-inline-end-width: var(--hair); }
+
+.pd-inner { padding: var(--s-6) var(--s-6) var(--s-5); }
+
+.pd-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block-end: var(--s-3);
+  border-block-end: var(--hair) solid var(--rule);
+}
+.pd-head-icon { color: var(--brass-ink); --icon: 17px; }
+
+.pd-title {
+  font-size: var(--t-h3-lg);
+  line-height: 1.22;
+  margin-block: var(--s-4) var(--s-2);
+  text-wrap: pretty;
+}
+.pd-body {
+  font-size: var(--t-body-s);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-block-end: var(--s-5);
+  max-width: 42ch;
+}
+
+/* ── Fields — underline only.
+   Scoped to direct children so the two fields inside .pd-row never inherit the
+   stacking margin and fall out of alignment with each other. ─────────────── */
+.pd-form > .pd-field + .pd-field,
+.pd-form > .pd-field + .pd-row,
+.pd-form > .pd-row + .pd-field { margin-block-start: var(--s-4); }
+.pd-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); align-items: start; }
+
+.pd-label { display: block; margin-block-end: 5px; }
+
+.pd-input {
+  display: block;
+  width: 100%;
+  padding: 7px 0 8px;
+  background: transparent;
+  border: 0;
+  border-block-end: var(--hair) solid var(--rule-strong);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: var(--t-body-s);
+  color: var(--ink);
+  transition: border-color var(--dur-fast) linear, background-color var(--dur-fast) linear;
+}
+.pd-input::placeholder { color: var(--ink-faint); }
+.pd-input:hover { border-block-end-color: var(--brass-line); }
+.pd-input:focus {
+  outline: none;
+  border-block-end-color: var(--brass);
+  border-block-end-width: var(--hair-2);
+  padding-block-end: 7px;
+}
+.pd-input:focus-visible { outline: none; }
+.pd-textarea { resize: none; line-height: 1.5; }
+.pd-input[aria-invalid='true'] { border-block-end-color: var(--brass-ink); }
+
+.pd-error {
+  margin-block-start: 5px;
+  font-size: var(--t-micro);
+  font-style: italic;
+  color: var(--brass-ink);
+}
+
+/* ── The photo plate ─────────────────────────────────────────────────────── */
+.pd-plate {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  width: 100%;
+  min-height: 84px;
+  padding: var(--s-4);
+  text-align: left;
+  background: var(--paper-deep);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  transition: box-shadow var(--dur-fast) linear, background-color var(--dur-fast) linear;
+}
+.pd-plate:hover,
+.pd-plate[data-drag='true'] {
+  background: var(--brass-soft);
+  box-shadow: inset 0 0 0 1px var(--brass);
+}
+.pd-plate-icon { --icon: 24px; color: var(--brass-ink); }
+.pd-plate-text { display: grid; gap: 3px; }
+.pd-plate-title { color: var(--ink); }
+.pd-plate-note { font-size: var(--t-micro); color: var(--ink-mute); letter-spacing: 0.02em; }
+
+.pd-plate--filled {
+  position: relative;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  background: var(--paper-edge);
+}
+.pd-shot {
+  width: 100%;
+  height: 116px;
+  object-fit: cover;
+  object-position: center;
+}
+.pd-shot-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: 7px var(--s-3);
+  background: var(--paper);
+  border-block-start: var(--hair) solid var(--brass-line);
+}
+.pd-file {
+  font-size: var(--t-micro);
+  color: var(--ink-label);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 55%;
+}
+.pd-shot-actions { display: flex; gap: var(--s-3); flex: none; }
+.pd-mini {
+  font-size: var(--t-micro);
+  font-weight: 600;
+  letter-spacing: var(--track-caps-sm);
+  text-transform: uppercase;
+  color: var(--brass-ink);
+  border-block-end: var(--hair) solid transparent;
+  transition: border-color var(--dur-fast) linear;
+}
+.pd-mini:hover { border-block-end-color: var(--brass); }
+
+.pd-submit { margin-block-start: var(--s-5); overflow: hidden; }
+/* The 900ms wait is given something to be: a rule drawing across the button. */
+.pd-submit::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--band-deep);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.pd-submit[data-sending='true']::after {
+  transform: scaleX(1);
+  transition: transform 900ms linear;
+}
+
+.pd-note {
+  margin-block-start: var(--s-3);
+  font-size: var(--t-micro);
+  line-height: 1.5;
+  color: var(--ink-mute);
+  text-align: center;
+}
+
+/* ── Success state ───────────────────────────────────────────────────────── */
+.pd-done { padding-block: var(--s-4) var(--s-2); text-align: center; }
+.pd-seal {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin: 0 auto var(--s-5);
+  border-radius: var(--r-pill);
+  box-shadow: inset 0 0 0 1px var(--brass), inset 0 0 0 5px var(--paper), inset 0 0 0 6px var(--brass-soft);
+  color: var(--brass-ink);
+  animation: pd-seal-in 620ms var(--ease-out-quart) both;
+}
+.pd-seal .lucide { --icon: 22px; stroke-width: 1.6; }
+@keyframes pd-seal-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: none; }
+}
+.pd-title--done { margin-block-start: 0; }
+.pd-done .pd-body { margin-inline: auto; text-align: center; }
+.pd-done-rule { width: 46px; margin: 0 auto var(--s-5); }
+.pd-done-actions { display: grid; gap: var(--s-4); justify-items: center; }
+.pd-again {
+  font-size: var(--t-micro);
+  font-weight: 600;
+  letter-spacing: var(--track-caps-sm);
+  text-transform: uppercase;
+  color: var(--ink-label);
+}
+
+/* ── Compact initial state for the mobile fold ───────────────────────────────
+   The explanatory paragraph is dropped on a phone — the heading and the plate
+   already say it — which is what buys the whole form its place above the fold
+   at 390x844. The success state keeps its copy. */
+@media (max-width: 900px) {
+  .pd-inner { padding: 16px 16px 13px; }
+  .pd-head { padding-block-end: var(--s-2); }
+  .pd-head-icon { --icon: 15px; }
+  .pd-title { font-size: var(--t-h4); line-height: 1.2; margin-block: var(--s-3) 0; }
+  .pd-form .pd-body { display: none; }
+  .pd-form .pd-title { margin-block-end: var(--s-3); }
+  .pd-plate { min-height: 54px; padding: 10px var(--s-3); gap: var(--s-3); }
+  .pd-plate-icon { --icon: 19px; }
+  .pd-plate-note { font-size: 0.625rem; }
+  .pd-shot { height: 84px; }
+  .pd-label { margin-block-end: 2px; }
+  .pd-input { padding: 4px 0 5px; font-size: var(--t-small); }
+  .pd-input:focus { padding-block-end: 4px; }
+  .pd-submit { margin-block-start: var(--s-3); padding-block: 13px; }
+  .pd-note { margin-block-start: var(--s-2); font-size: 0.625rem; line-height: 1.45; }
+  .pd-form > .pd-field + .pd-field,
+  .pd-form > .pd-field + .pd-row,
+  .pd-form > .pd-row + .pd-field { margin-block-start: 10px; }
+  .pd-corner { width: 10px; height: 10px; }
+}
+
+/* Short phones — the plate tightens one more notch rather than losing a field. */
+@media (max-width: 900px) and (max-height: 820px) {
+  .pd-inner { padding: 12px 14px 11px; }
+  .pd-form .pd-head { display: none; }
+  .pd-form .pd-title { margin-block: 0 var(--s-2); font-size: var(--t-body-l); }
+  .pd-plate { min-height: 46px; padding: 8px var(--s-3); }
+  .pd-plate-icon { --icon: 17px; }
+  .pd-shot { height: 74px; }
+  .pd-submit { margin-block-start: var(--s-2); padding-block: 11px; }
+  .pd-form > .pd-field + .pd-field,
+  .pd-form > .pd-field + .pd-row,
+  .pd-form > .pd-row + .pd-field { margin-block-start: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-seal { animation: none; }
+}

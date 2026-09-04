@@ -1,0 +1,113 @@
+/* ── Services — Editorial Magazine-Style Service Spread ──────────────────────
+   A 12-column spread that keeps the zig-zag rhythm (photo left, right, left)
+   without stretching six one-sentence services into six full-width bands.
+   Grid-Breaking Oversized Image, use 2 of 2: the third photograph runs wider
+   than its column and off the left page edge. */
+
+.svc { overflow: hidden; }
+
+.svc-head { margin-block-end: clamp(38px, 4.4vw, 68px); }
+.svc-eyebrow { display: block; margin-block-end: var(--s-3); }
+.svc-title { font-size: var(--t-h2); max-width: 22ch; }
+
+.svc-spread {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(20px, 2.4vw, 40px);
+  row-gap: clamp(44px, 5.4vw, 88px);
+  align-items: stretch;
+}
+
+.svc-figure { overflow: hidden; }
+.svc-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.svc-figure--a { grid-column: 1 / 6; aspect-ratio: 4 / 5; }
+.svc-pair--a   { grid-column: 7 / 13; }
+.svc-pair--b   { grid-column: 1 / 7; }
+.svc-figure--b { grid-column: 8 / 13; aspect-ratio: 4 / 5; }
+.svc-figure--c {
+  grid-column: 1 / 8;
+  aspect-ratio: 16 / 10;
+  margin-inline-start: calc(var(--shell-margin) * -1);
+}
+.svc-pair--c   { grid-column: 9 / 13; }
+
+/* Each pair spans the full height of the photograph opposite it, with the two
+   entries pushed to the top and bottom edges — the spread's structural move. */
+.svc-pair {
+  display: grid;
+  gap: clamp(26px, 3vw, 46px);
+  align-content: space-between;
+}
+.svc-item-rule { width: 100%; margin-block-end: var(--s-4); }
+.svc-item-title {
+  font-size: var(--t-h3);
+  line-height: 1.24;
+  margin-block-end: var(--s-3);
+  text-wrap: balance;
+}
+.svc-item-body {
+  font-size: var(--t-body-s);
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.svc-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-5);
+  margin-block-start: clamp(48px, 5.6vw, 88px);
+  padding-block-start: clamp(24px, 2.6vw, 38px);
+  border-block-start: var(--hair) solid var(--rule);
+}
+.svc-foot-rule { display: none; }
+.svc-foot-text {
+  font-family: var(--font-display);
+  font-size: var(--t-h4);
+  line-height: 1.4;
+  color: var(--ink);
+  margin-inline-end: auto;
+  max-width: 34ch;
+}
+
+@media (max-width: 1024px) {
+  .svc-figure--a { grid-column: 1 / 7; }
+  .svc-pair--a   { grid-column: 8 / 13; }
+  .svc-pair--b   { grid-column: 1 / 6; }
+  .svc-figure--b { grid-column: 7 / 13; }
+  .svc-figure--c { grid-column: 1 / 8; }
+  .svc-pair--c   { grid-column: 8 / 13; }
+}
+
+@media (max-width: 780px) {
+  .svc-spread { grid-template-columns: minmax(0, 1fr); row-gap: clamp(30px, 6vw, 48px); }
+  .svc-figure--a,
+  .svc-pair--a,
+  .svc-pair--b,
+  .svc-figure--b,
+  .svc-figure--c,
+  .svc-pair--c { grid-column: 1 / -1; }
+  .svc-figure--a,
+  .svc-figure--b,
+  .svc-figure--c { aspect-ratio: 16 / 9; }
+  .svc-figure--c {
+    margin-inline-start: calc(var(--shell-margin) * -1);
+    margin-inline-end: calc(var(--shell-margin) * -1);
+  }
+  /* keep the alternation legible on one column: photo, then its two services */
+  .svc-figure--a { order: 1; }
+  .svc-pair--a   { order: 2; }
+  .svc-figure--b { order: 3; }
+  .svc-pair--b   { order: 4; }
+  .svc-figure--c { order: 5; }
+  .svc-pair--c   { order: 6; }
+  .svc-item-body { max-width: none; }
+  .svc-foot { gap: var(--s-4); }
+  .svc-foot-text { font-size: var(--t-body); }
+}
